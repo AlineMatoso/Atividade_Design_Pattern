@@ -5,21 +5,18 @@ public class ApolicAuto extends AbsApolice{
     private int tempoHabilitacao;
     private double coberturaTerceiros;
 
-    // para resumo
+    // private significa que somente essa classe consegue acessar diretamente esses atributos.
 
-    private String numeroApolice;
-    private String segurado;
-    private String dataEmissao;
+    public ApolicAuto(String numeroApolice, String segurado, String dataEmissao,
+        double valorFipe, int idadeCondutor,
+        int tempoHabilitacao, double coberturaTerceiros) {
 
-
-
-    public ApolicAuto(double valorFipe, int idadeCondutor, int tempoHabilitacao, double coberturaTerceiros) {
-
+        super(numeroApolice, segurado, dataEmissao); // vem da mae AbsApolice
         this.valorFipe = valorFipe;
         this.idadeCondutor = idadeCondutor;
         this.tempoHabilitacao = tempoHabilitacao;
-        this.coberturaTerceiros = coberturaTerceiros; 
-    }
+        this.coberturaTerceiros = coberturaTerceiros;
+        }
 
     @Override
     public double calculoDePremio() {
@@ -47,13 +44,11 @@ public class ApolicAuto extends AbsApolice{
         return "CNH, CRLV e comprovante de residência";
     }
 
-  
-
     @Override
     public String resumo() {
-        return "Número da apólice: " + numeroApolice
-                + "\nSegurado: " + segurado
-                + "\nData de emissão: " + dataEmissao
+        return "Número da apólice: " + getNumeroApolice()
+                + "\nSegurado: " + getSegurado()
+                + "\nData de emissão: " + getDataEmissao()
                 + "\nPrêmio mensal: R$ " + calculoDePremio()
                 + "\nDocumentos exigidos: " + listagemDocumentos();
     }
