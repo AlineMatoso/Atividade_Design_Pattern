@@ -4,19 +4,13 @@ public class FabricaViagem extends AbsCriador {
     private boolean internacional;
     private double coberturaAssistencia;
     private boolean possuiPassaporte;
-
-    private String numeroApolice;
     private String segurado;
     private String dataEmissao;
 
-    public FabricaViagem(String numeroApolice, String segurado, String dataEmissao,
-                         int diasViagem, boolean internacional,
+    public FabricaViagem(String segurado, String dataEmissao, int diasViagem, boolean internacional,
                          double coberturaAssistencia, boolean possuiPassaporte) {
-
-        this.numeroApolice = numeroApolice;
         this.segurado = segurado;
         this.dataEmissao = dataEmissao;
-
         this.diasViagem = diasViagem;
         this.internacional = internacional;
         this.coberturaAssistencia = coberturaAssistencia;
@@ -26,7 +20,7 @@ public class FabricaViagem extends AbsCriador {
     @Override
     public AbsApolice criarApolice() {
         return new ApolicViagem(
-                numeroApolice,
+                gerarNumeroApolice(),
                 segurado,
                 dataEmissao,
                 diasViagem,
@@ -34,5 +28,10 @@ public class FabricaViagem extends AbsCriador {
                 coberturaAssistencia,
                 possuiPassaporte
         );
+    }
+
+    @Override
+    public String gerarNumeroApolice() {
+        return "VIA-" + System.currentTimeMillis();
     }
 }

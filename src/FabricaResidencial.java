@@ -3,14 +3,11 @@ public class FabricaResidencial extends AbsCriador {
     private double valorImovel;
     private boolean altoPadrao;
     private boolean possuiEscrituraOuContrato;
-
-    private String numeroApolice;
     private String segurado;
     private String dataEmissao;
 
-    public FabricaResidencial(String numeroApolice, String segurado, String dataEmissao,double valorImovel,
+    public FabricaResidencial(String segurado, String dataEmissao,double valorImovel,
         boolean altoPadrao, boolean possuiEscrituraOuContrato) {
-            this.numeroApolice = numeroApolice;
             this.segurado = segurado;
             this.dataEmissao = dataEmissao;
 
@@ -19,10 +16,21 @@ public class FabricaResidencial extends AbsCriador {
             this.possuiEscrituraOuContrato = possuiEscrituraOuContrato;
     }
 
-    @Override
+        @Override
     public AbsApolice criarApolice() {
-        return new ApolicResidencial(numeroApolice, segurado, dataEmissao,
-                valorImovel, altoPadrao, possuiEscrituraOuContrato);
+        return new ApolicResidencial(
+                gerarNumeroApolice(),
+                segurado,
+                dataEmissao,
+                valorImovel,
+                altoPadrao,
+                possuiEscrituraOuContrato
+        );
+    }
+
+        @Override
+    public String gerarNumeroApolice() {
+        return "RES-" + System.currentTimeMillis();
     }
 
 }
